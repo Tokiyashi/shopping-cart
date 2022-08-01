@@ -1,2 +1,2 @@
 # shopping-cart
-This app uses TypeScript, React, Redux
+This app uses TypeScript, React, Redux, Tailwind
