@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import StoreItemsList from "../components/StoreItemsList/StoreItemsList";
+import Cart from "../components/Cart/Cart";
 
 const Store = () => {
     const [storeItems, setStoreItems] = useState([
@@ -12,6 +13,7 @@ const Store = () => {
 
     return (
         <div>
+            <Cart/>
             <StoreItemsList storeItems={storeItems}/>
         </div>
     );
