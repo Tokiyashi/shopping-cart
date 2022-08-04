@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {IStoreItem} from "../../types/store";
+import {CartActionTypes, IStoreItem} from "../../types/store";
+import {useDispatch} from "react-redux";
 
 interface StoreItemProps{
     storeItem: IStoreItem,
@@ -10,11 +11,20 @@ const StoreItem: React.FC<StoreItemProps> =
          storeItem
     }) => {
 
+    const dispatch = useDispatch()
     const [quantity, setQuantity] = useState(0)
 
 
         function addToCart() {
-            setQuantity(quantity+1);
+            setQuantity(1)
+            dispatch({type: CartActionTypes.ADD_ITEM, payload:
+                    {
+                        id: storeItem.id,
+                        imgUrl: storeItem.imgUrl,
+                        quantity: 1,
+                        name: storeItem.name,
+                        price: storeItem.price
+                    }})
         }
 
         function removeFromCart(){
@@ -22,11 +32,10 @@ const StoreItem: React.FC<StoreItemProps> =
         }
 
         return (
-        <div className="flex rounded-2xl items-center flex-col justify-center shadow-lg mb-10 mx-5">
+        <div className="border-8 border-fuchsia-100 flex rounded-2xl items-center flex-col justify-between shadow-lg mb-10 mx-5">
             <img
-                className="rounded-t-2xl"
+                className="w-full max-h-72 rounded-t-2xl"
                 alt="itemImage"
-                height="200px"
                 style={{objectFit: "cover"}}
                 src={storeItem.imgUrl}
             />
@@ -37,9 +46,9 @@ const StoreItem: React.FC<StoreItemProps> =
                 {
                     quantity > 0
                     ? <div className="flex items-center gap-3">
-                        <button onClick={()=>removeFromCart()} className="bg-pink-500 w-10 h-10 my-3 rounded-md text-center text-white">-</button>
+                        <button className="bg-pink-500 w-10 h-10 my-3 rounded-md text-center text-white">-</button>
                             <h1>{quantity} Added to cart</h1>
-                        <button onClick={()=>addToCart()} className="bg-pink-500 w-10 h-10 my-3 rounded-md text-center text-white">+</button>
+                        <button className="bg-pink-500 w-10 h-10 my-3 rounded-md text-center text-white">+</button>
                     </div>
                     : <button onClick={() => addToCart()} className="bg-pink-500 rounded-2xl w-full text-center p-5 text-white">
                         Buy

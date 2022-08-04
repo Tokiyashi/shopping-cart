@@ -11,7 +11,7 @@ const StoreItemsList: React.FC<StoreItemsListProps> = ({storeItems}) => {
         <div className="grid lg:grid-cols-3 md:grid-cols-2">
             {
                 storeItems.map((item, index) =>
-                <StoreItem storeItem={item}/>
+                <StoreItem key={item.id} storeItem={item}/>
             )
             }
         </div>
